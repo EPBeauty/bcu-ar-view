@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AR View</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    @font-face {
+      font-family: 'SF Pro';
+      src: local('SF Pro Text'), local('SFProText-Regular');
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #fff;
+    }
+
+    model-viewer {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <model-viewer
+    id="arViewer"
+    src="uruns4son.glb"
+    ar
+    autoplay
+    ar-modes="webxr scene-viewer quick-look"
+    environment-image="neutral"
+    exposure="1">
+  </model-viewer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const viewer = document.getElementById('arViewer');
+      if (viewer && viewer.activateAR) {
+        viewer.activateAR();
+      }
+    });
+  </script>
+</body>
+</html>
