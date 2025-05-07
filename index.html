@@ -3,20 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AR View</title>
+  <title>AR Tray - iOS</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    @font-face {
-      font-family: 'SF Pro';
-      src: local('SF Pro Text'), local('SFProText-Regular');
-    }
-
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', sans-serif;
       background-color: #fff;
     }
 
@@ -24,26 +19,61 @@
       width: 100vw;
       height: 100vh;
     }
+
+    #laptop-hint {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 14px;
+      color: #34C759; /* iOS accent green */
+      z-index: 2;
+    }
+
+    #laptop-hint .arrow {
+      font-size: 24px;
+      line-height: 1;
+    }
   </style>
 </head>
 <body>
   <model-viewer
     id="arViewer"
-    src="uruns4son.glb"
+    src="uruns4son2.glb"
     ar
     autoplay
     ar-modes="webxr scene-viewer quick-look"
     environment-image="neutral"
     exposure="1">
+    <button slot="ar-button" style="
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', sans-serif;
+      font-size: 14px;
+      padding: 10px 16px;
+      background: #34C759;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;">
+      Tap to place your tray
+    </button>
   </model-viewer>
 
+  <div id="laptop-hint">
+    <div>You should use a separate tray for the laptop.</div>
+    <div class="arrow">⬇️</div>
+  </div>
+
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const viewer = document.getElementById('arViewer');
-      if (viewer && viewer.activateAR) {
-        viewer.activateAR();
+    const viewer = document.getElementById('arViewer');
+    const hint = document.getElementById('laptop-hint');
+
+    viewer.addEventListener('ar-status', (event) => {
+      if (event.detail.status === 'session-started') {
+        if (hint) hint.style.display = 'none';
       }
     });
   </script>
 </body>
 </html>
+
