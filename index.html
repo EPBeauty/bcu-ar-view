@@ -35,6 +35,22 @@
       font-size: 24px;
       line-height: 1;
     }
+
+    #custom-ar-button {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 6px 12px;
+      font-size: 14px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #34C759;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      z-index: 3;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -48,18 +64,34 @@
     exposure="1">
   </model-viewer>
 
+  <!-- Yeşil ok ve açıklama -->
   <div id="laptop-hint">
     <div>You should use a separate tray for the laptop.</div>
     <div class="arrow">⬇️</div>
   </div>
 
+  <!-- Go AR View Butonu -->
+  <button id="custom-ar-button">Go AR View</button>
+
   <script>
     const viewer = document.getElementById('arViewer');
     const hint = document.getElementById('laptop-hint');
+    const customARBtn = document.getElementById('custom-ar-button');
 
+    // Butona tıklanınca AR mod başlat
+    if (customARBtn) {
+      customARBtn.addEventListener('click', () => {
+        if (viewer && viewer.activateAR) {
+          viewer.activateAR();
+        }
+      });
+    }
+
+    // AR başladıysa yazı ve butonu gizle
     viewer.addEventListener('ar-status', (event) => {
       if (event.detail.status === 'session-started') {
         if (hint) hint.style.display = 'none';
+        if (customARBtn) customARBtn.style.display = 'none';
       }
     });
   </script>
