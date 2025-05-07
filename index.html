@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AR Tray - iOS</title>
+  <title>AR Tray - iOS Final</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     html, body {
@@ -27,7 +27,7 @@
       transform: translateX(-50%);
       text-align: center;
       font-size: 14px;
-      color: #34C759; /* iOS accent green */
+      color: #34C759;
       z-index: 2;
     }
 
@@ -46,17 +46,6 @@
     ar-modes="webxr scene-viewer quick-look"
     environment-image="neutral"
     exposure="1">
-    <button slot="ar-button" style="
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', sans-serif;
-      font-size: 14px;
-      padding: 10px 16px;
-      background: #34C759;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;">
-      Tap to place your tray
-    </button>
   </model-viewer>
 
   <div id="laptop-hint">
@@ -76,4 +65,5 @@
   </script>
 </body>
 </html>
+
 
